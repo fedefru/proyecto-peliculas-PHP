@@ -1,0 +1,4 @@
+function ok(){
+    alert('Bienvenido');
+}
+
