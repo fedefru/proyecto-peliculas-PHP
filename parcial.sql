@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2020 a las 02:12:38
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Tiempo de generación: 07-11-2020 a las 07:57:33
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `parcial`
 --
-CREATE DATABASE IF NOT EXISTS `parcial` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `parcial`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `peliculasPaginado` (IN `iniciar` INT(50), IN `npeliculas` INT(50))  SELECT * FROM movies LIMIT iniciar,npeliculas$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllMovies` ()  SELECT * FROM `movies`$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -49,7 +57,7 @@ INSERT INTO `movies` (`id`, `titulo`, `año`, `puntaje`, `duracion`, `genero`, `
 (2, 'We Summon The Darkness', 2019, 5.1, '91', 'Terror', 'Año 1988. Los habitantes de los Estados Unidos están aterrorizados por una serie de asesinatos satánicos que se han cometido a lo largo del país, y cuyos responsables parecen ser asistentes a conciertos de heavy metal. Tres chicas en su veintena, Alexis, ', 'https://somosmovies.com/uploads/poster/zXAwq18CJYmzhLZNbLpBf3dG3A5.jpg'),
 (3, 'Sueños de libertad', 1994, 9.3, '182', 'Drama', 'Dos hombres encarcelados se unen durante varios años, encontrando consuelo y eventual redención a través de actos de decencia común.', 'https://www.guioteca.com/los-90/files/2016/08/Sueno-de-fuga.jpg'),
 (4, 'La lista de Schindler', 1993, 8.9, '195', 'Drama, Historia', 'En la Polonia ocupada por alemania durante la Segunda Guerra Mundial, el industrial Oskar Schindler poco a poco se preocupa por su fuerza de trabajo judía después de presenciar su persecución por los nazis.', 'https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg'),
-(7, 'El Padrino II', 1974, 9.5, '202', 'Crimen, Drama', 'La vida temprana y la carrera de Vito Corleone en la década de 1920 en Nueva York es retratada, mientras que su hijo, Michael, expande y endurece su control sobre el sindicato del crimen familiar.', 'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg'),
+(7, 'El Padrino II', 1974, 9.5, '202', 'Crimen, Drama', 'La vida temprana y la carrera de Vito Corleone en la década de 1920 en Nueva York es retratada, mientras que su hijo, Michael, expande y endurece su control sobre el sindicato del crimen familiar.', 'https://vivirlavidacomoenunapelicula.files.wordpress.com/2018/03/2aac97615c14269b2c5cc4e66ebd9401-60240-godfather2.jpg'),
 (8, 'El padrino', 1972, 9.4, '235', 'Crimen, Drama', 'El patriarca envejecido de una dinastía del crimen organizado transfiere el control de su imperio clandestino a su hijo reacio.', 'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR3,0,182,268_AL_.jpg'),
 (9, 'We Die Young', 2019, 5.5, '93', 'Drama', 'Lucas (Elijah Rodriguez) es un adolescente de 14 años al que la vida de pandillero ha seducido en la ciudad de Washington D.C. Pese a ello, tiene claro que hará todo lo posible por evitar que su hermano de 10 años siga sus mismos pasos', 'https://somosmovies.com/uploads/poster/dB0Dl2nDRmvplaJLeHSfkppJXHs.jpg'),
 (10, 'Capone ', 2020, 5, '103', 'Crimen, Drama', 'Tras pasar 10 años en prisión, el gánster Al Capone, de 47 años, comienza a sufrir de demencia y su mente comienza a ser acosada por los recuerdos de su violento pasado.', 'https://somosmovies.com/uploads/poster/b0GO87eW5LL64GTqgRZSj1jroSx.jpg'),
@@ -116,7 +124,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
