@@ -132,71 +132,14 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
         $resultado_peliculas = $sentencia_peliculas->fetchAll();
         ?>
 
-        
-        <div class="row justify-content-center">
-            <h2 style="font-weight: bold; color: black;margin-left:10px;margin-top:10px;">Peliculas <i id="boton2" class="far fa-eye" style="color: rgb(224, 49, 49);"></i></h2>
+
+        <div class="row">
             <div class="col-12">
+                <h2 style="font-weight: bold; color: black;margin-left:10px;margin-top:10px;">Peliculas <i id="boton2" class="far fa-eye" style="color: rgb(224, 49, 49);"></i></h2>
                 <p style="text-align: justify;" id="descripcion">En este espacio podrá visualizar todas las películas que fueron cargadas, al seleccionar una en especifíco puede ver de que trata, su puntaje, de que año es, entre otros. Si nota que una película debe estar aquí dirigase al apartado de contacto y mandenos un mensaje. <i id="boton1" class="far fa-eye-slash" style="color: rgb(224, 49, 49);"></i></p>
             </div>
-           
-                                            
-                <?php
-                require 'conexion.php';
-                foreach ($resultado_peliculas as $lgc) {
-                ?>
-                
-                    <div class="col-md-2 col-sm-2" style=" margin-top: 20px; margin-left:20px; height: 400px" >
-                        <div class="card" style="height:100%;">
 
-                            <img class="card-img-top" src="<?php echo $lgc['imagen_link'] ?>" alt="Card image cap" style="height:225px; width: 100%">
-
-                            <div class="card-body">
-                                <center style="margin-bottom: 10px"><i class="fas fa-heart" style="color: rgb(224, 49, 49); "></i><span style="font-weight: bold;"> <?php echo $lgc['puntaje'] ?></span></center>
-
-                                <a href="" class="titulos"><?php echo $lgc['titulo'] ?></a>
-                            </div>
-
-                            <div>
-                                <center>
-                                    <!--launch modal-->
-                                    <a style="cursor:pointer;font-size:23px;margin-right:10px" data-toggle="modal" data-target="#info<?php echo $lgc['id'] ?>"><i class="fas fa-info" style="color: rgb(224, 49, 49);"></i></a>
-
-                                    <!--modal-->
-                                    <div class="modal fade" id="info<?php echo $lgc['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="movieLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="modal-title" id="movieLabel"><?php echo $lgc['titulo'] ?></h2><br>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    
-                                                    <img class="card-img-top" src="<?php echo $lgc['imagen_link'] ?>" alt="Card image cap" style="height:225px; width: 50%; margin-bottom:5px">
-                                                    <center style="margin-bottom: 10px">
-                                                    <i class="fas fa-heart" style="color: rgb(224, 49, 49); "></i>
-                                                    <span style="font-weight: bold;"> <?php echo $lgc['puntaje'] ?></span> 
-                                                    |<span> <?php echo $lgc['duracion'] ?> minutos</span> | <span><?php echo $lgc['año'] ?></span>
-                                                    </center>
-
-                                                    <p><?php echo $lgc['descripcion'] ?></p>
-                                                    <h5><?php echo $lgc['genero'] ?></h5>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a style="cursor:pointer;font-size:23px;margin-right:10px" data-toggle="modal" data-target="#modificar<?php echo $lgc['id'] ?>"><i class="fas fa-pen" style="color: rgb(224, 49, 49);"> </i></a>
-                                    <a style="cursor:pointer;font-size:23px" name="eliminar" href="peliculas.php?eliminar=<?php echo $lgc['id'] ?>"><i class="fas fa-trash-alt" style="color: rgb(224, 49, 49);"></i></a></center>
-                                    
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="col-md-1"></div>
 
             <?php
             require 'conexion.php';
