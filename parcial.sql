@@ -84,6 +84,23 @@ INSERT INTO `movies` (`id`, `titulo`, `año`, `puntaje`, `duracion`, `genero`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `movies_eliminadas`
+--
+
+CREATE TABLE `movies_eliminadas` (
+  `id` int(11) NOT NULL,
+  `año` int(11) NOT NULL,
+  `descripcion` varchar(500) NOT NULL,
+  `duracion` varchar(255) NOT NULL,
+  `genero` varchar(350) NOT NULL,
+  `imagen_link` varchar(600) NOT NULL,
+  `puntaje` float NOT NULL,
+  `titulo` varchar(500) NOT NULL,
+  `usuario` varchar(500) NOT NULL,
+  `fecha` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -126,6 +143,12 @@ ALTER TABLE `users`
 ALTER TABLE `movies`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
+
+CREATE TRIGGER EliminarPelicula AFTER DELETE 
+ON movies
+FOR EACH ROW
+INSERT INTO movies_eliminadas(id,año,descripcion,duracion,genero,imagen_link,puntaje,titulo,usuario,fecha)
+VALUES(old.id,old.año,old.descripcion,old.duracion,old.genero,old.imagen_link,old.puntaje,old.titulo,USER(),NOW());
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
