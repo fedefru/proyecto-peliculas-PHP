@@ -101,19 +101,20 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
         $resultado_peliculas = $sentencia_peliculas->fetchAll();
         ?>
 
-
-        <div class="row">
+        
+        <div class="row justify-content-center">
+            <h2 style="font-weight: bold; color: black;margin-left:10px;margin-top:10px;">Peliculas <i id="boton2" class="far fa-eye" style="color: rgb(224, 49, 49);"></i></h2>
             <div class="col-12">
-                <h2 style="font-weight: bold; color: black;margin-left:10px;margin-top:10px;">Peliculas</h2>
+                <p style="text-align: justify;" id="descripcion">En este espacio podrá visualizar todas las películas que fueron cargadas, al seleccionar una en especifíco puede ver de que trata, su puntaje, de que año es, entre otros. Si nota que una película debe estar aquí dirigase al apartado de contacto y mandenos un mensaje. <i id="boton1" class="far fa-eye-slash" style="color: rgb(224, 49, 49);"></i></p>
             </div>
-
-                <div class="col-md-1"></div>
-             
+           
+                                            
                 <?php
                 require 'conexion.php';
                 foreach ($resultado_peliculas as $lgc) {
                 ?>
-                    <div class="col-md-2 col-sm-2" style=" margin-top: 20px; margin-left:20px; height: 400px">
+                
+                    <div class="col-md-2 col-sm-2" style=" margin-top: 20px; margin-left:20px; height: 400px" >
                         <div class="card" style="height:100%;">
 
                             <img class="card-img-top" src="<?php echo $lgc['imagen_link'] ?>" alt="Card image cap" style="height:225px; width: 100%">
@@ -140,6 +141,7 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    
                                                     <img class="card-img-top" src="<?php echo $lgc['imagen_link'] ?>" alt="Card image cap" style="height:225px; width: 50%; margin-bottom:5px">
                                                     <center style="margin-bottom: 10px">
                                                     <i class="fas fa-heart" style="color: rgb(224, 49, 49); "></i>
