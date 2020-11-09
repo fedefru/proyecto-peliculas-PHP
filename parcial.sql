@@ -25,6 +25,9 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+DROP PROCEDURE IF EXISTS peliculasPaginado $$
+DROP PROCEDURE IF EXISTS selectAllMovies $$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `peliculasPaginado` (IN `iniciar` INT(50), IN `npeliculas` INT(50))  SELECT * FROM movies LIMIT iniciar,npeliculas$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `selectAllMovies` ()  SELECT * FROM `movies`$$
@@ -36,6 +39,8 @@ DELIMITER ;
 --
 -- Estructura de tabla para la tabla `movies`
 --
+
+DROP TABLE IF EXISTS movies;
 
 CREATE TABLE `movies` (
   `id` int(255) NOT NULL,
@@ -87,6 +92,8 @@ INSERT INTO `movies` (`id`, `titulo`, `año`, `puntaje`, `duracion`, `genero`, `
 -- Estructura de tabla para la tabla `movies_eliminadas`
 --
 
+DROP TABLE IF EXISTS movies_eliminadas;
+
 CREATE TABLE `movies_eliminadas` (
   `id` int(11) NOT NULL,
   `año` int(11) NOT NULL,
@@ -103,6 +110,7 @@ CREATE TABLE `movies_eliminadas` (
 --
 -- Estructura de tabla para la tabla `users`
 --
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -143,6 +151,8 @@ ALTER TABLE `users`
 ALTER TABLE `movies`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
+
+DROP TRIGGER IF EXISTS EliminarPelicula;
 
 CREATE TRIGGER EliminarPelicula AFTER DELETE 
 ON movies
