@@ -173,7 +173,7 @@ drop function if exists mejor_pelicula;
  end //
  delimiter ;
  
- select f_mayor_trafico();
+ select mejor_pelicula();
  
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
