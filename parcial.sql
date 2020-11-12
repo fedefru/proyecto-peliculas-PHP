@@ -160,6 +160,21 @@ FOR EACH ROW
 INSERT INTO movies_eliminadas(id,año,descripcion,duracion,genero,imagen_link,puntaje,titulo,usuario,fecha)
 VALUES(old.id,old.año,old.descripcion,old.duracion,old.genero,old.imagen_link,old.puntaje,old.titulo,USER(),NOW());
 
+drop function if exists mejor_pelicula;
+ 
+ delimiter //
+ create function mejor_pelicula()
+   returns varchar(100)
+   deterministic
+ begin
+   declare pelicula varchar(100);
+   select titulo into pelicula from movies order by puntaje desc limit 1;
+   return pelicula;
+ end //
+ delimiter ;
+ 
+ select f_mayor_trafico();
+ 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
