@@ -5,10 +5,11 @@ function valido(){
     let duracion = document.getElementsByName('duracion');
     let descripcion = document.getElementsByName('descripcion');
 
+    let rgxPuntaje = new RegExp(/^[0-9]{1,2}$/);
 
     if( año && puntaje && genero && duracion && descripcion  ){
     
-        if(puntaje > 10 || puntaje < 0 ){
+        if(puntaje > 10 || puntaje < 0 && rgxPuntaje.test(puntaje) ) {
             alert('El puntaje debe estar entre los rangos 10 y 0');
             return;
         }if(año > 2020){

@@ -102,6 +102,14 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
         fwrite($csv, $text);
         fclose($csv);
 
+        $mysqli = new mysqli('localhost', 'root', '', 'parcial');
+        $mysqli->set_charset("utf8");   
+
+         $res = $mysqli->query("SELECT contarPeliculas() as cantidad");
+         $rows =mysqli_fetch_array($res);
+        //print json_encode($rows['cantidad']);
+                    
+
         $peliculas_x_pagina = 4;
         $total_peliculas = $sentencia->rowCount();
         $paginas = $total_peliculas / 4;
@@ -138,7 +146,6 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
                 <h2 style="font-weight: bold; color: black;margin-left:10px;margin-top:10px;">Peliculas <i id="boton2" class="far fa-eye" style="color: rgb(224, 49, 49);"></i></h2>
                 <p style="text-align: justify;" id="descripcion">En este espacio podrá visualizar todas las películas que fueron cargadas, al seleccionar una en especifíco puede ver de que trata, su puntaje, de que año es, entre otros. Si nota que una película debe estar aquí dirigase al apartado de contacto y mandenos un mensaje. <i id="boton1" class="far fa-eye-slash" style="color: rgb(224, 49, 49);"></i></p>
             </div>
-
             <div class="col-md-1"></div>
 
             <?php
@@ -260,6 +267,8 @@ if (isset($_SESSION['usuario']) && strlen($_SESSION['usuario']) > 0) {
         </div>
 
         <br><br><br>
+
+        <h5 class="text-center">Cantidad de peliculas cargadas: <?php echo $rows['cantidad'] ?></h5>
 
         <div class="col-12 ">
             <nav aria-label="...">

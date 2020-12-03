@@ -174,6 +174,16 @@ drop function if exists mejor_pelicula;
  delimiter ;
  
  select mejor_pelicula();
+
+
+BEGIN 
+DECLARE Cant INTEGER;
+
+SELECT COUNT(*) FROM movies INTO Cant;
+
+RETURN Cant;
+
+END
  
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
